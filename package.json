@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "author": "yzy",
   "description": "it is amour for wyh",
-  "license": null,
+  "license": "BSD",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js",
