@@ -35,9 +35,7 @@
                 }
             },
             onBack: function () {
-                this.$router.push({
-                    path: '/'
-                })
+                this.$router.go(-1);
             },
             showWait() {
                 document.getElementById("bg").style.display = "block";
@@ -95,7 +93,7 @@
                 path:"D:\\pugCheckTemp",
             }
         },
-        mounted(){
+        created(){
             _ipcRenderer.on('excelReadOver',(event,arg)=>{
                 console.log("收到 VAT 核对 excelReadOver");
                 this.hideWait();
@@ -105,7 +103,11 @@
                 console.log("收到 VAT 核对 TempMakeOver");
                 shell.openItem(this.path);
             });
-        }
+        },
+        destroyed() {
+            console.log('earningCheck destroyed');
+            _ipcRenderer.removeAllListeners('excelReadOver','TempMakeOver');
+        },
     }
 </script>
 <style lang="scss" scoped>

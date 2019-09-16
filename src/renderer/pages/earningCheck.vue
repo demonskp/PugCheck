@@ -35,10 +35,7 @@ const shell = require('electron').shell;
                 }
             },
             goBack:function(){
-                // ipcRenderer.send('open', 'mainWindowPage');
-                this.$router.push({
-                    path: '/'
-                })
+                this.$router.go(-1);
             },
             doCheck(path) {
                 console.log('doCheck')
@@ -99,8 +96,8 @@ const shell = require('electron').shell;
                 path:"D:\\pugCheckTemp",
             }
         },
-        mounted() {
-        
+        created() {
+            console.log('earningCheck created');
             this.url=location.href;
             _ipcRenderer.on('excelReadOver', (event, arg) => {
                 this.hideWait();
@@ -111,7 +108,11 @@ const shell = require('electron').shell;
                 shell.openItem(this.path);
             });
 
-        }
+        },
+        destroyed() {
+            console.log('earningCheck destroyed');
+            _ipcRenderer.removeAllListeners('excelReadOver','TempMakeOver');
+        },
     }
 </script>
 
